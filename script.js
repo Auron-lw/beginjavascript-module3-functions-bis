@@ -11,6 +11,16 @@ Choose an operator :
 
 const LIMIT = 100000000000000;
 
+let operator = Number(prompt("\n> Enter the operator : "));
+
+while (operator !== 1 && operator !== 2 && operator !== 3 && operator !== 4) {
+  console.log("Operator must be 1, 2, 3 or 4, retry !");
+  operator = Number(prompt("\n> Enter the operator : "));
+}
+
+const firstNumber = promptNumber("> Enter the first number : ");
+const secondNumber = promptNumber("> Enter the second number : ");
+
 function promptNumber(message) {
   const number = Number(prompt(message));
   validateNumberOrExitTheProgramme(number);
@@ -26,45 +36,40 @@ function validateNumberOrExitTheProgramme(number) {
   }
 }
 
-let operator = 0;
-
-while (operator === 0) {
-  const tempOperator = promptNumber("\n> Enter the operator : ");
-
-  if (
-    tempOperator !== 1 &&
-    tempOperator !== 2 &&
-    tempOperator !== 3 &&
-    tempOperator !== 4
-  ) {
-    console.log("\nError : operator is not 1, 2, 3 or 4 ! Retry.");
-  } else {
-    operator = tempOperator;
-  }
-}
-
-const firstNumber = promptNumber("> Enter the first number : ");
-const secondNumber = promptNumber("> Enter the second number : ");
-
-switch (operator) {
-  case 1:
-    console.log("The result of addition is : ", firstNumber + secondNumber);
-    break;
-  case 2:
-    console.log("The result of subtraction is : ", firstNumber - secondNumber);
-    break;
-  case 3:
+function calculateResult(operator, firstNumber, secondNumber) {
+  if (operator === 1) {
     console.log(
-      "The result of multiplication is : ",
+      "\nThe result of the addition is : ",
+      firstNumber + secondNumber
+    );
+    return;
+  }
+
+  if (operator === 2) {
+    console.log(
+      "\nThe result of the subtraction is : ",
+      firstNumber - secondNumber
+    );
+    return;
+  }
+
+  if (operator === 3) {
+    console.log(
+      "\nThe result of the multiplication is : ",
       firstNumber * secondNumber
     );
-    break;
-  case 4:
-    if (operator === 4 && secondNumber === 0) {
+    return;
+  }
+  if (operator === 4) {
+    if (secondNumber === 0) {
       console.log("Error : division by 0");
       process.exit(1);
     }
-    1;
-    console.log("The result of division is : ", firstNumber / secondNumber);
-    break;
+    console.log(
+      "\nThe result of the division is : ",
+      firstNumber / secondNumber
+    );
+    return;
+  }
 }
+calculateResult(operator, firstNumber, secondNumber);
