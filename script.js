@@ -1,25 +1,15 @@
 import { prompt } from "./helper.js";
 
-console.log("ADDITION-MASTER ™️");
-
-console.log(`
-Choose an operator :
-1. Addition
-2. Subtraction
-3. Multiplication
-4. Division`);
-
 const LIMIT = 100000000000000;
 
-let operator = Number(prompt("\n> Enter the operator : "));
-
-while (operator !== 1 && operator !== 2 && operator !== 3 && operator !== 4) {
-  console.log("Operator must be 1, 2, 3 or 4, retry !");
-  operator = Number(prompt("\n> Enter the operator : "));
+function promptOperator() {
+  const operator = Number(prompt("\n> Enter the operator : "));
+  if (operator !== 1 && operator !== 2 && operator !== 3 && operator !== 4) {
+    console.log("Operator must be 1, 2, 3 or 4, retry !");
+    return promptOperator();
+  }
+  return operator;
 }
-
-const firstNumber = promptNumber("> Enter the first number : ");
-const secondNumber = promptNumber("> Enter the second number : ");
 
 function promptNumber(message) {
   const number = Number(prompt(message));
@@ -72,4 +62,18 @@ function calculateResult(operator, firstNumber, secondNumber) {
     return;
   }
 }
+
+console.log("ADDITION-MASTER ™️");
+
+console.log(`
+Choose an operator :
+1. Addition
+2. Subtraction
+3. Multiplication
+4. Division`);
+
+const operator = promptOperator();
+const firstNumber = promptNumber("> Enter the first number : ");
+const secondNumber = promptNumber("> Enter the second number : ");
+
 calculateResult(operator, firstNumber, secondNumber);
