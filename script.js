@@ -11,7 +11,13 @@ Choose an operator :
 
 const LIMIT = 100000000000000;
 
-function validateNumber(number) {
+function promptNumber(message) {
+  const number = Number(prompt(message));
+  validateNumberOrExitTheProgramme(number);
+  return number;
+}
+
+function validateNumberOrExitTheProgramme(number) {
   if (Number.isNaN(number) || Math.abs(number) > LIMIT) {
     console.log(
       `Error : it's not a number or is too big / too small (max: ${LIMIT})`
@@ -23,7 +29,7 @@ function validateNumber(number) {
 let operator = 0;
 
 while (operator === 0) {
-  const tempOperator = Number(prompt("\n> Enter the operator : "));
+  const tempOperator = promptNumber("\n> Enter the operator : ");
 
   if (
     tempOperator !== 1 &&
@@ -37,13 +43,8 @@ while (operator === 0) {
   }
 }
 
-const firstNumber = Number(prompt("> Enter the first number : "));
-
-validateNumber(firstNumber);
-
-const secondNumber = Number(prompt("> Enter the second number : "));
-
-validateNumber(secondNumber);
+const firstNumber = promptNumber("> Enter the first number : ");
+const secondNumber = promptNumber("> Enter the second number : ");
 
 switch (operator) {
   case 1:
